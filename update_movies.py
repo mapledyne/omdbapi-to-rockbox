@@ -1,3 +1,5 @@
+"""Build XML info files for roksbox from omdbapi data."""
+
 import sys
 import argparse
 import json
@@ -15,7 +17,7 @@ _base_url = 'http://www.omdbapi.com/'
 
 
 def api_get(data):
-
+    """Get JSON data from omdbapi."""
     requisite_headers = {'Accept': 'application/json',
                          'Content-Type': 'application/json'}
 
@@ -29,7 +31,8 @@ def get_movie(movie):
     movie_data = {'t': movie}
     status, results = api_get(movie_data)
 
-    return results
+    if status == 200:
+        return results
 
 
 def json_to_xml(movie_json):
@@ -44,13 +47,17 @@ def json_to_xml(movie_json):
       "Runtime": "100 min",
       "Genre": "Animation, Adventure, Comedy",
       "Director": "Phil Lord, Christopher Miller",
-      "Writer": "Phil Lord (screenplay), Christopher Miller (screenplay), Dan Hageman (story), Kevin Hageman (story), Phil Lord (story), Christopher Miller (story)",
+      "Writer": "Phil Lord (screenplay), Christopher Miller (screenplay),
+                 Dan Hageman (story), Kevin Hageman (story), Phil Lord (story),
+                 Christopher Miller (story)",
       "Actors": "Will Arnett, Elizabeth Banks, Craig Berry, Alison Brie",
-      "Plot": "An ordinary Lego construction worker, thought to be the prophesied 'Special', is recruited to join a quest to stop an evil tyrant from gluing the Lego universe into eternal stasis.",
+      "Plot": "An ordinary Lego construction worker, thought to be the
+               prophesied 'Special', is recruited to join a quest to stop an
+               evil tyrant from gluing the Lego universe into eternal stasis.",
       "Language": "English",
       "Country": "Australia, USA, Denmark",
       "Awards": "Nominated for 1 Oscar. Another 65 wins & 56 nominations.",
-      "Poster": "http://ia.media-imdb.com/images/M/MV5BMTg4MDk1ODExN15BMl5BanBnXkFtZTgwNzIyNjg3MDE@._V1_SX300.jpg",
+      "Poster": "http://ia.media-imdb.com/images/M/V1_SX300.jpg",
       "Metascore": "83",
       "imdbRating": "7.8",
       "imdbVotes": "216176",
